@@ -1,11 +1,45 @@
+import java.util.Scanner;
 public class Main {
-    public static void main(String ... args){
-        System.out.println("Début initialisation");
-        LibelleValeur test1 = new LibelleValeur("France",20);
-        LibelleValeur test2 = new LibelleValeur("Espagne",52);
 
-        System.out.println("Initialisation finie");
-        System.out.println(test1);
-        System.out.println(test2);
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+
+        //appel du constructeur avec l'adresse de la base, vos propres login mot de passe MySQL
+        String DB ="jdbc:mysql://";
+        System.out.println("Entre l'adresse du serveur sql (ex: PC-TP-MYSQL.insa-lyon.fr");
+        DB += sc.nextLine()+":";
+        System.out.println("Port (ex:3306)");
+        DB += sc.nextLine()+"/";
+        System.out.println("Nom de la Base (ex:EUROSTATS_EXTR)");
+        DB += sc.nextLine();
+
+        System.out.println("Entrez votre login");
+        String login = sc.nextLine();
+
+        System.out.println("Entrez votre pwd");
+        String pwd = sc.nextLine();
+
+        System.out.println(DB);
+        InterrogBD monInterroBD = new InterrogBD(DB,login,pwd);
+
+        System.out.println("Que souhaitez vous afficher ?");
+        System.out.println("1. Population par pays");
+        System.out.println("2. Espérance de vie par continent");
+
+        int choice = sc.nextInt();
+
+        if (choice==1){
+            System.out.println("Combien de pays souhaitez vous afficher ?");
+            int nbPays = sc.nextInt();
+            monInterroBD.population(nbPays);
+
+        }else if (choice==2){
+            monInterroBD.vieContinent();
+
+        }else{
+            System.out.println("Choix non autorisé");
+
+        }
+
     }
 }
