@@ -23,13 +23,12 @@ public class Main {
         System.out.println(DB);
         InterrogBD monInterroBD = new InterrogBD(DB,login,pwd);
 
-        System.out.println("Que souhaitez vous afficher ?");
-        System.out.println("1. Population par pays");
-        System.out.println("2. Espérance de vie par continent");
 
-        int choice = sc.nextInt();
-        
         while(gogo=true){
+            System.out.println("Que souhaitez vous afficher ?");
+            System.out.println("1. Population par pays");
+            System.out.println("2. Espérance de vie par continent");
+            int choice = sc.nextInt();
             if (choice==1){
                 System.out.println("Combien de pays souhaitez vous afficher ?");
                 int nbPays = sc.nextInt();

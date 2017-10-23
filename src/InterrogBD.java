@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class InterrogBD{
     private Connection conn;    //attribut qui memorise la connexion a la base
-    private boolean continue; 
+    private boolean gogo;
             
     /**
      * Le constructeur de la classe etablit la connexion.
@@ -19,7 +19,8 @@ public class InterrogBD{
             conn = DriverManager.getConnection(adresseBD, nomLogin, mdp);
             System.out.println("Connexion etablie...");
             System.out.println("");
-            continue = true;
+            gogo = true;
+
         } catch(Exception e){
             //Affiche le message d'erreur si une erreur se produit durant la connexion
             System.out.println(e.getMessage());
@@ -27,7 +28,7 @@ public class InterrogBD{
         }
     }
 
-    public void afficheValeursHisto() {
+    public boolean afficheValeursHisto() {
         try {
             //Creation de la requete
             // nom des etudiante-s ayant validé plus de 1 cours (on compte le nombre de notes definies)
@@ -51,10 +52,15 @@ public class InterrogBD{
                 LibelleValeur histo = new LibelleValeur(nom, (float)(nbcours));
                 System.out.println(histo.ligne('+',1));
             }
+            System.out.println("Voulez-vous effectuer une autre requete ? (true,false)");
+            Scanner sc = new Scanner(System.in);
+            gogo = sc.nextBoolean();
+            return gogo;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
             System.exit(0);
+            return false;
         }
     }
 
@@ -82,10 +88,15 @@ public class InterrogBD{
                 LibelleValeur histo = new LibelleValeur(pays, (float)(pop));
                 System.out.println(histo.ligne('+',10000000));
             }
+            System.out.println("Voulez-vous effectuer une autre requete ? (true,false)");
+            Scanner sc = new Scanner(System.in);
+            gogo = sc.nextBoolean();
+            return gogo;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
             System.exit(0);
+            return false;
         }
     }
 
@@ -113,13 +124,15 @@ public class InterrogBD{
                 LibelleValeur histo = new LibelleValeur(continent, (float)(dureeVie));
                 System.out.println(histo.ligne('+',1));
             }
-            System.out.println("Voulez-vous effectuer une autre requete ?");
-            Scanner sc = new Scanner(System.in());
-            continue = 
+            System.out.println("Voulez-vous effectuer une autre requete ? (true,false)");
+            Scanner sc = new Scanner(System.in);
+            gogo = sc.nextBoolean();  //false cassé
+            return gogo;
         }
         catch(Exception e){
             System.out.println(e.getMessage());
             System.exit(0);
+            return false;
         }
     }
 
