@@ -3,7 +3,7 @@ public class Main {
 
     public static void main(String [] args) {
         Scanner sc = new Scanner(System.in);
-        boolean gogo = true;
+        boolean go = true;
 
         //appel du constructeur avec l'adresse de la base, vos propres login mot de passe MySQL
         String DB ="jdbc:mysql://";
@@ -24,7 +24,7 @@ public class Main {
         InterrogBD monInterroBD = new InterrogBD(DB,login,pwd);
 
 
-        while(gogo=true){
+        while(go==true){
             System.out.println("Que souhaitez vous afficher ?");
             System.out.println("1. Population par pays");
             System.out.println("2. Espérance de vie par continent");
@@ -32,15 +32,17 @@ public class Main {
             if (choice==1){
                 System.out.println("Combien de pays souhaitez vous afficher ?");
                 int nbPays = sc.nextInt();
-                gogo = monInterroBD.population(nbPays);
+                monInterroBD.population(nbPays);
     
             }else if (choice==2){
-                gogo = monInterroBD.vieContinent();
+                monInterroBD.vieContinent();
     
             }else{
                 System.out.println("Choix non autorisé");
     
             }
+            System.out.println("Voulez-vosu effectuer une autre requête ? (true/false)");
+            go = sc.nextBoolean();
         }
 
     }
