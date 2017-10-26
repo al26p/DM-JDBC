@@ -4,11 +4,13 @@ import java.util.Scanner;
 public class InterrogBD{
     private Connection conn;    //attribut qui memorise la connexion a la base
 
-            
+
     /**
      * Le constructeur de la classe etablit la connexion.
-     * parametres : l'adresse de la base de donnees,
-     *  le login et le mot de passe
+     *
+     * @param adresseBD Adresse de la Base de Données
+     * @param nomLogin Login de la BdD
+     * @param mdp Mot de Passe de la BdD
      */
     public InterrogBD(String adresseBD, String nomLogin, String mdp) {
         try {           
@@ -27,7 +29,7 @@ public class InterrogBD{
             System.exit(0);
         }
     }
-
+    //exercice 2
     public void afficheValeursHisto() {
         try {
             //Creation de la requete
@@ -60,12 +62,16 @@ public class InterrogBD{
 
         }
     }
+    //exercice 3
 
+    /**
+     * Affichage de la population par pays
+     * @param nbPays nombre de pays a afficher
+     */
     public void population(int nbPays) {
         try {
             //Creation de la requete
-            // nom des etudiante-s ayant validé plus de 1 cours (on compte le nombre de notes definies)
-            // et nombre de cours valides
+            // affichage de la popultaion par pays par ordre croissant
             String sqlStr = "SELECT Country,Population FROM countries ORDER BY Population DESC LIMIT "+nbPays+";";
             Statement stmt = conn.createStatement();
 
@@ -75,14 +81,13 @@ public class InterrogBD{
 
             //affichage des resultats
             System.out.println("Affichage de la population par pays, ordonne par ordre decroissant ");
-            //System.out.println("Nom     Nombre de cours validés");
-            //parcours du resultat
+
             //res.next() permet de passer d'une ligne du resultat a la suivante.
             //res.next() renvoie false si toutes les lignes ont ete parcourues.
             while (res.next()) {
                 String pays = res.getString(1);
                 int pop = res.getInt(2);
-                LibelleValeur histo = new LibelleValeur(pays, (float)(pop));
+                LibelleValeur histo = new LibelleValeur(pays, (float)(pop)); //On utilise la classe LibelleValeur pour afficher le resultat
                 System.out.println(histo.ligne('+',10000000));
             }
 
@@ -94,12 +99,14 @@ public class InterrogBD{
         }
     }
 
+    /**
+     * Affiche l'espérance de vie par continent
+     */
     public void vieContinent() {
         try {
             //Creation de la requete
-            // nom des etudiante-s ayant validé plus de 1 cours (on compte le nombre de notes definies)
-            // et nombre de cours valides
-            String sqlStr = "SELECT Continent,avg(Life_expect) FROM countries WHERE Life_expect IS NOT NULL GROUP BY Continent ORDER BY avg(Life_expect) DESC ";
+            // affichage de l'espérance de vie par continent
+            String sqlStr = "SELECT Continent,avg(Life_expect) FROM countries WHERE Life_expect IS NOT NULL GROUP BY Continent ";
             Statement stmt = conn.createStatement();
 
             //execution de la requete
@@ -108,8 +115,7 @@ public class InterrogBD{
 
             //affichage des resultats
             System.out.println("Affichage de l'espérance de vie par continent ");
-            //System.out.println("Nom     Nombre de cours validés");
-            //parcours du resultat
+
             //res.next() permet de passer d'une ligne du resultat a la suivante.
             //res.next() renvoie false si toutes les lignes ont ete parcourues.
             while (res.next()) {

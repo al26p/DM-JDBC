@@ -1,6 +1,9 @@
 import java.util.Scanner;
 public class Main {
-
+    /**
+     * Méthode principale
+     * @param args non utilisé
+     */
     public static void main(String [] args) {
         Scanner sc = new Scanner(System.in);
         boolean go = true;
@@ -27,7 +30,7 @@ public class Main {
         while(go==true){
             System.out.println("Que souhaitez vous afficher ?");
             System.out.println("1. Population par pays");
-            System.out.println("2. Espérance de vie par continent");
+            System.out.println("2. Esperance de vie par continent");
             int choice = sc.nextInt();
             if (choice==1){
                 System.out.println("Combien de pays souhaitez vous afficher ?");
@@ -38,10 +41,10 @@ public class Main {
                 monInterroBD.vieContinent();
     
             }else{
-                System.out.println("Choix non autorisé");
+                System.out.println("Choix non autorise");
     
             }
-            System.out.println("Voulez-vosu effectuer une autre requête ? (true/false)");
+            System.out.println("Voulez-vous effectuer une autre requete ? (true/false)");
             go = sc.nextBoolean();
         }
 
