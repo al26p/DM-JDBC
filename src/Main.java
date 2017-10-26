@@ -17,6 +17,7 @@ public class Main {
         System.out.println("Nom de la Base (ex:EUROSTATS_EXTR)");
         DB += sc.nextLine();
 
+
         System.out.println("Entrez votre login");
         String login = sc.nextLine();
 
